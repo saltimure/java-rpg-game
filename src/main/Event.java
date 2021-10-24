@@ -7,13 +7,15 @@ public class Event {
 	
 	public String fight(User user, Enemy enemy) {
 		int damagedHealth;
-		while(user.getHealth() > 0) {
+		int userHealth = user.getHealth();
+		while(userHealth > 0) {
 			damagedHealth = enemy.getHealth() - user.getAttack();
 			enemy.setHealth(damagedHealth);
 			if(enemy.getHealth() > 0) {
-				damagedHealth = user.getHealth() - enemy.getAttack();
-				user.setHealth(damagedHealth);
+				damagedHealth = userHealth - enemy.getAttack();
+				userHealth -= damagedHealth;
 			} else {
+				user.levelProgression(enemy.getDifficulty());
 				return "player won";
 			}
 		}
