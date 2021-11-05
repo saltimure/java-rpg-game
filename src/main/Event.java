@@ -12,8 +12,7 @@ public class Event {
 			damagedHealth = enemy.getHealth() - user.getAttack();
 			enemy.setHealth(damagedHealth);
 			if(enemy.getHealth() > 0) {
-				damagedHealth = userHealth - enemy.getAttack();
-				userHealth -= damagedHealth;
+				userHealth -= enemy.getAttack();
 			} else {
 				user.levelProgression(enemy.getDifficulty());
 				return "player won";

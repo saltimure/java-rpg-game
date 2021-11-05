@@ -6,22 +6,6 @@ public class User {
 	private int attack;
 	private String[] inventory;
 	private int level;
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getProgress() {
-		return progress;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
 	private int progress;
 	
 	public User() {
@@ -39,6 +23,22 @@ public class User {
 			attack += 10;
 			this.progress -= 100;
 		}
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public int getProgress() {
+		return progress;
+	}
+	
+	public void setProgress(int progress) {
+		this.progress = progress;
 	}
 
 	public int getHealth() {

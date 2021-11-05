@@ -14,7 +14,7 @@ public class RPGApp {
 					+ "\n" + "6.Restart game" + "\n" + "7.Exit game");
 			switch (scan.nextInt()) {
 			case 1:
-				System.out.println("Which difficulty do you whant?");
+				System.out.println("Which difficulty do you want?");
 				System.out.println(event.fight(user, new Enemy(scan.nextInt())));
 				break;
 			case 2:
