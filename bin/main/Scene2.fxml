@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SceneController">
+   <children>
+      <Button layoutX="361.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="50.0" prefWidth="129.0" text="Switch To Scene1" />
+   </children>
+</AnchorPane>

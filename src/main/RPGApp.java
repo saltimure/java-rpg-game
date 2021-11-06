@@ -1,10 +1,21 @@
 package main;
 
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class RPGApp {
+public class RPGApp extends Application{
 
 	public static void main(String[] args) {
+		
+		Application.launch(args);
+		
+		/*
 		Scanner scan = new Scanner(System.in);
 		Event event = new Event();
 		User user = new User();
@@ -40,5 +51,21 @@ public class RPGApp {
 				break;
 			}
 		}
+		*/
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		
+		Image image = new Image("1.jpeg");
+		ImageView imageView = new ImageView(image);
+		Parent root = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+		Scene scene = new Scene(root);
+		
+		stage.getIcons().add(image);
+		stage.setTitle("saltimure");
+		
+		stage.setScene(scene);
+		stage.show();
 	}
 }
