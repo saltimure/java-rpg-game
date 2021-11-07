@@ -56,15 +56,11 @@ public class RPGApp extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		
-		Image image = new Image("1.jpeg");
-		ImageView imageView = new ImageView(image);
-		Parent root = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Scene1.fxml"));
 		Scene scene = new Scene(root);
 		
-		stage.getIcons().add(image);
 		stage.setTitle("saltimure");
-		
+		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
 	}
