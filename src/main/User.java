@@ -15,6 +15,22 @@ public class User {
 		this.progress = 0;
 	}
 	
+	public String fight(User user, Enemy enemy) {
+		int damagedHealth;
+		int userHealth = user.getHealth();
+		while(userHealth > 0) {
+			damagedHealth = enemy.getHealth() - user.getAttack();
+			enemy.setHealth(damagedHealth);
+			if(enemy.getHealth() > 0) {
+				userHealth -= enemy.getAttack();
+			} else {
+				user.levelProgression(enemy.getDifficulty());
+				return "Player won";
+			}
+		}
+		return "Enemy won";
+	}
+	
 	public void levelProgression(int difficulty) {
 		this.progress += 10 * difficulty;
 		if (this.progress >= 100) {
@@ -40,7 +56,7 @@ public class User {
 	public void setProgress(int progress) {
 		this.progress = progress;
 	}
-
+	
 	public int getHealth() {
 		return health;
 	}

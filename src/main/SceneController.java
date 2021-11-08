@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,25 +18,63 @@ public class SceneController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private User user = new User();
+	private int difficulty = 1;
+	private String consoleInfo = "";
 	
 	@FXML
-	private Label nameLabel;
-	@FXML
-	private TextField nameTextField;
-
-	public void setUsername(ActionEvent e) throws IOException {
-		nameLabel.setText(nameTextField.getText());
+	private TextArea textArea;
+	
+	public void fightResult(ActionEvent e) {
+		if (user.fight(user, new Enemy(difficulty)) == "Player won") {
+			consoleInfo += "\n" + "Player won";
+		} else {
+			consoleInfo += "\n" + "Enemy won" + "\n" + "You died.";
+			user = new User();
+		}
+		textArea.setText(consoleInfo);
+	}
+	
+	public void restart(ActionEvent e) {
+		user = new User();
+		consoleInfo += "\n" + "You restared the game";
+		textArea.setText(consoleInfo);
+	}
+	
+	public void plusDifficulty(ActionEvent e) {
+		difficulty++;
+		consoleInfo += "\n" + "Difficulty: " + difficulty;
+		textArea.setText(consoleInfo);
+	}
+	
+	public void minusDifficulty(ActionEvent e) {
+		difficulty--;
+		consoleInfo += "\n" + "Difficulty: " + difficulty;
+		textArea.setText(consoleInfo);
+	}
+	
+	public void showStats(ActionEvent e) {
+		consoleInfo += "\n" + "Your health: " + user.getHealth()
+				+ "\n" + "Your attack: " + user.getAttack()
+				+ "\n" + "Your level: " + user.getLevel()
+				+ "\n" + "Your progress: " + user.getProgress();
+		textArea.setText(consoleInfo);
+	}
+	
+	public void clearTextArea(ActionEvent e) {
+		textArea.clear();
+		consoleInfo = "";
 	}
 	
 	public void switchToScene1(ActionEvent e) throws IOException {
-		loadStage("Scene1.fxml", e);
+		loadScene("Scene1.fxml", e);
 	}
 	
 	public void switchToScene2(ActionEvent e) throws IOException {
-		loadStage("Scene2.fxml", e);
+		loadScene("Scene2.fxml", e);
 	}
 	
-	public void loadStage(String fxml, ActionEvent e) throws IOException {
+	public void loadScene(String fxml, ActionEvent e) throws IOException {
 		root = FXMLLoader.load(getClass().getClassLoader().getResource(fxml));
 		scene = new Scene(root);
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();

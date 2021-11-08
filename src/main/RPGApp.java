@@ -14,7 +14,6 @@ public class RPGApp extends Application{
 	public static void main(String[] args) {
 		
 		Application.launch(args);
-		
 		/*
 		Scanner scan = new Scanner(System.in);
 		Event event = new Event();
