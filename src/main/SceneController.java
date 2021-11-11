@@ -42,11 +42,13 @@ public class SceneController {
 			user = new User();
 		}
 		textArea.setText(consoleInfo);
+		/*
 		if ((int)(Math.random() * (3 - 1) + 1) == 1) {
 			Image image = new Image((int)(Math.random() * (3 - 1) + 1) + ".jpeg");		
 			imgArList.add(image);
 			imageView.setImage(image);
 		}
+		*/
 	}
 	
 	public void restart(ActionEvent e) {
