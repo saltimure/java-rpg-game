@@ -1,5 +1,6 @@
 package main;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class User {
@@ -7,6 +8,7 @@ public class User {
 	private int health;
 	private int attack;
 	private ArrayList<String> inventory = new ArrayList<String>();
+
 	private int level;
 	private int progress;
 	
@@ -33,6 +35,14 @@ public class User {
 		return "Enemy won";
 	}
 	
+	public ArrayList<String> getInventory() {
+		return inventory;
+	}
+	
+	public void setInventory(ArrayList<String> inventory) {
+		this.inventory = inventory;
+	}
+	
 	public void levelProgression(int difficulty) {
 		this.progress += 10 * difficulty;
 		if (this.progress >= 100) {
@@ -43,17 +53,21 @@ public class User {
 		}
 	}
 	
-	public void addItem(String item) {
-		this.inventory.add(item);
-	}
-	
-	public void removeItem(String item) {
-		this.inventory.remove(item);
+	public String getItem(int itemIndex) {
+		return inventory.get(itemIndex);			
 	}
 	
 	public String showInventory() {
 		String stringInventory = String.join(", ", this.inventory);
 		return stringInventory;
+	}
+	
+	public void addItem(String item) {
+		inventory.add(item);
+	}
+	
+	public void removeItem(int itemIndex) {
+		inventory.remove(itemIndex);
 	}
 	
 	public int getLevel() {

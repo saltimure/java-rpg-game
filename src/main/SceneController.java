@@ -19,12 +19,17 @@ public class SceneController {
 	private Scene scene;
 	private Parent root;
 	private User user = new User();
-	private int difficulty = 1;
 	private ArrayList<Image> imageArayList = new ArrayList<Image>();
 	private String[] itemPool = {"Sword", "Axe","Shield","Revolver","Desert Eagle",
 								"Saber", "Dagger", "Sledgehammer", "Machete", "Knife"};
+	private int difficulty = 1;
 	private int countDefeatedEnemy = 0;
-	private int itemPower;
+	private int itemPower = 0;
+	private int tempItemPower = 0;
+	private String equipedItem = "";
+	private ArrayList<Integer> itemPowerSequence = new ArrayList<Integer>();
+	private int itemIndex = 0;
+	private String item;
 	
 	@FXML
 	private TextArea consoleTextArea;
@@ -52,11 +57,43 @@ public class SceneController {
 	
 	public void itemDrop() {
 		if (randomNumber() == 1) {
+			item = itemPool[randomNumber() - 1];
 			itemPower = randomNumber();
-			user.addItem(itemPool[randomNumber() - 1] + " +" + itemPower);
+			itemPowerSequence.add(itemPower);
+			user.addItem(item + " +" + itemPower);
 			consoleTextArea.setText("You defeated the enemy. " + countDefeatedEnemy + "\n" + 
-									"You found Sword +" + itemPower);
+									"You found: " + item + "+ " + itemPower);
 			inventoryTextArea.setText(user.showInventory());
+		}
+	}
+	
+	public void chooseLeftItem(ActionEvent e) {
+		--itemIndex;
+		consoleTextArea.setText(user.getItem(itemIndex));				
+	}
+	
+	public void chooseRightItem(ActionEvent e) {
+		++itemIndex;
+		consoleTextArea.setText(user.getItem(itemIndex));				
+	}	
+	
+	public void equipItem(ActionEvent e) {
+		user.setAttack(user.getAttack() - tempItemPower + itemPowerSequence.get(itemIndex));
+		equipedItem = user.getItem(itemIndex);
+		tempItemPower = itemPowerSequence.get(itemIndex);
+		consoleTextArea.setText("You equiped item");
+		showStats();
+	}
+	
+	public void dropItem(ActionEvent e) {
+		if (user.getItem(itemIndex) != null) {
+			if (user.getItem(itemIndex) == equipedItem) {
+				user.setAttack(user.getAttack() - itemPowerSequence.get(itemIndex));
+			}
+			user.removeItem(itemIndex);
+			consoleTextArea.setText("You dropped item");
+			inventoryTextArea.setText(user.showInventory());
+			showStats();
 		}
 	}
 	

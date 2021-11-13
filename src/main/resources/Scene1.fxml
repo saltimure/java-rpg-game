@@ -47,7 +47,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <TextArea fx:id="inventoryTextArea" layoutX="26.0" layoutY="530.0" prefHeight="200.0" prefWidth="393.0" text="Your inventory is empty" wrapText="true">
+      <TextArea fx:id="inventoryTextArea" layoutX="26.0" layoutY="530.0" prefHeight="158.0" prefWidth="393.0" text="Your inventory is empty" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></TextArea>
@@ -61,5 +61,25 @@
             <Font size="20.0" />
          </font>
       </TextArea>
+      <Button fx:id="leftButton" layoutX="69.0" layoutY="697.0" mnemonicParsing="false" onAction="#chooseLeftItem" prefHeight="44.0" prefWidth="65.0" text="&lt;-">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="rightButton" layoutX="141.0" layoutY="697.0" mnemonicParsing="false" onAction="#chooseRightItem" prefHeight="44.0" prefWidth="65.0" text="-&gt;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="equipButton" layoutX="232.0" layoutY="697.0" mnemonicParsing="false" onAction="#equipItem" prefHeight="44.0" prefWidth="65.0" text="Equip">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="dropButton" layoutX="307.0" layoutY="697.0" mnemonicParsing="false" onAction="#dropItem" prefHeight="44.0" prefWidth="65.0" text="Drop">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
