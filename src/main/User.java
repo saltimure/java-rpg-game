@@ -1,10 +1,12 @@
 package main;
 
+import java.util.ArrayList;
+
 public class User {
 	
 	private int health;
 	private int attack;
-	private String[] inventory;
+	private ArrayList<String> inventory = new ArrayList<String>();
 	private int level;
 	private int progress;
 	
@@ -39,6 +41,19 @@ public class User {
 			attack += 10;
 			this.progress -= 100;
 		}
+	}
+	
+	public void addItem(String item) {
+		this.inventory.add(item);
+	}
+	
+	public void removeItem(String item) {
+		this.inventory.remove(item);
+	}
+	
+	public String showInventory() {
+		String stringInventory = String.join(", ", this.inventory);
+		return stringInventory;
 	}
 	
 	public int getLevel() {

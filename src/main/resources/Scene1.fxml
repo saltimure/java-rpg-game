@@ -9,19 +9,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SceneController">
    <children>
-      <Button fx:id="button" layoutX="651.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="56.0" prefWidth="118.0" text="Tavern">
+      <Button fx:id="tavernButton" layoutX="651.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="56.0" prefWidth="118.0" text="Tavern">
          <font>
             <Font size="26.0" />
          </font></Button>
-      <TextArea fx:id="textArea" layoutX="441.0" layoutY="94.0" prefHeight="593.0" prefWidth="328.0" wrapText="true">
+      <TextArea fx:id="textArea" layoutX="441.0" layoutY="94.0" prefHeight="593.0" prefWidth="328.0" text="Welcome to the game!&#10;Default difficulty is 1. You can increase it, or decrease.&#10;Maximun enemy health and attack on this difficulty is 10 (it's random).&#10;You have first level, 10 health and 7 attack.&#10;Good luck and have fun! :)" wrapText="true">
          <font>
             <Font size="20.0" />
          </font></TextArea>
-      <Button fx:id="button2" layoutX="23.0" layoutY="93.0" mnemonicParsing="false" onAction="#fightResult" prefHeight="50.0" prefWidth="118.0" text="Fight">
+      <Button fx:id="fightButton" layoutX="23.0" layoutY="93.0" mnemonicParsing="false" onAction="#fightResult" prefHeight="50.0" prefWidth="118.0" text="Fight">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button fx:id="button3" layoutX="153.0" layoutY="92.0" mnemonicParsing="false" onAction="#showStats" prefHeight="54.0" prefWidth="118.0" text="Info">
+      <Button fx:id="infoButton" layoutX="163.0" layoutY="92.0" mnemonicParsing="false" onAction="#showStats" prefHeight="54.0" prefWidth="118.0" text="Info">
          <font>
             <Font size="27.0" />
          </font>
@@ -31,26 +31,40 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="plusDifficulty" layoutX="190.0" layoutY="22.0" mnemonicParsing="false" onAction="#plusDifficulty" prefHeight="44.0" prefWidth="43.0" text="+">
+      <Button fx:id="plusDifficulty" layoutX="191.0" layoutY="22.0" mnemonicParsing="false" onAction="#plusDifficulty" prefHeight="44.0" prefWidth="43.0" text="+">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="minusDifficulty" layoutX="251.0" layoutY="22.0" mnemonicParsing="false" onAction="#minusDifficulty" prefHeight="35.0" prefWidth="43.0" text="-">
+      <Button fx:id="minusDifficulty" layoutX="250.0" layoutY="22.0" mnemonicParsing="false" onAction="#minusDifficulty" prefHeight="35.0" prefWidth="43.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
       <Label layoutX="23.0" layoutY="15.0" prefHeight="59.0" prefWidth="178.0" text="Change Difficulty:">
          <font>
-            <Font size="18.0" />
+            <Font size="19.0" />
          </font>
       </Label>
-      <Button layoutX="288.0" layoutY="92.0" mnemonicParsing="false" onAction="#restart" prefHeight="57.0" prefWidth="118.0" text="Restart">
+      <Button fx:id="restartButton" layoutX="302.0" layoutY="92.0" mnemonicParsing="false" onAction="#restart" prefHeight="57.0" prefWidth="118.0" text="Restart">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
-      <ImageView fx:id="imageView" fitHeight="270.0" fitWidth="279.0" layoutX="23.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="295.0" fitWidth="393.0" layoutX="23.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="172.0" layoutY="164.0" prefHeight="59.0" prefWidth="178.0" text="Inventory:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="inventoryTextArea" layoutX="23.0" layoutY="223.0" prefHeight="200.0" prefWidth="393.0" text="Your inventory is empty" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font></TextArea>
+      <Button fx:id="teamButton" layoutX="521.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="56.0" prefWidth="118.0" text="Team">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -8,8 +8,8 @@ public class Enemy {
 	
 	public Enemy(int difficulty) {
 		this.difficulty = difficulty;
-		this.health = (int)(Math.random() * (11 - 1) + 1) * difficulty;
-		this.attack = (int)(Math.random() * (11 - 1) + 1) * difficulty;
+		this.health = (int)(Math.random() * 10 + 1) * difficulty;
+		this.attack = (int)(Math.random() * 10 + 1) * difficulty;
 	}
 
 	public int getDifficulty() {

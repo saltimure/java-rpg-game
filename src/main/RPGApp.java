@@ -1,16 +1,15 @@
 package main;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class RPGApp extends Application{
-
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
