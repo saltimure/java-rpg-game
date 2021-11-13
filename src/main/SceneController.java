@@ -20,12 +20,16 @@ public class SceneController {
 	private Parent root;
 	private User user = new User();
 	private int difficulty = 1;
-	private String consoleInfo = "";
-	private ArrayList<Image> imgArList = new ArrayList<Image>();
-	private String[] itemPool = {"Sword", "Axe"};
+	private ArrayList<Image> imageArayList = new ArrayList<Image>();
+	private String[] itemPool = {"Sword", "Axe","Shield","Revolver","Desert Eagle",
+								"Saber", "Dagger", "Sledgehammer", "Machete", "Knife"};
+	private int countDefeatedEnemy = 0;
+	private int itemPower;
 	
 	@FXML
-	private TextArea textArea;
+	private TextArea consoleTextArea;
+	@FXML
+	private TextArea statsTextArea;
 	@FXML
 	private TextArea inventoryTextArea;
 	@FXML
@@ -35,52 +39,53 @@ public class SceneController {
 	
 	public void fightResult(ActionEvent e) {
 		if (user.fight(user, new Enemy(difficulty)) == "Player won") {
-			consoleInfo += "\n" + "Player won";
+			consoleTextArea.setText("You defeated the enemy. " + ++countDefeatedEnemy);
+			itemDrop();
+			showStats();
 		} else {
-			consoleInfo += "\n" + "Enemy won" + "\n" + "You died.";
+			consoleTextArea.setText("Enemy won" + "\n" + "You died.");
+			countDefeatedEnemy = 0;
 			user = new User();
+			showStats();
 		}
-		textArea.setText(consoleInfo);
-		if ((int)(Math.random() * 10 + 1) == 1) {
-			int itemPower = (int)(Math.random() * 10 + 1);
-			user.addItem(itemPool[0] + " +" + itemPower);
-			consoleInfo += "\n" + "You found Sword +" + itemPower;
-			textArea.setText(consoleInfo);
+	}
+	
+	public void itemDrop() {
+		if (randomNumber() == 1) {
+			itemPower = randomNumber();
+			user.addItem(itemPool[randomNumber() - 1] + " +" + itemPower);
+			consoleTextArea.setText("You defeated the enemy. " + countDefeatedEnemy + "\n" + 
+									"You found Sword +" + itemPower);
 			inventoryTextArea.setText(user.showInventory());
 		}
 	}
 	
+	public int randomNumber() {
+		return (int)(Math.random() * 10 + 1);
+	}
+	
+	public void showStats() {
+		statsTextArea.setText("Your health: " + user.getHealth()
+		+ "\n" + "Your attack: " + user.getAttack()
+		+ "\n" + "Your level: " + user.getLevel()
+		+ "\n" + "Your progress: " + user.getProgress());
+	}
+	
 	public void restart(ActionEvent e) {
 		user = new User();
-		consoleInfo += "\n" + "You restared the game";
-		textArea.setText(consoleInfo);
+		consoleTextArea.setText("You restared the game");
 	}
 	
 	public void plusDifficulty(ActionEvent e) {
 		difficulty++;
-		consoleInfo += "\n" + "Difficulty: " + difficulty + "\n"
-						+ "Maximun enemy health and attack is " + difficulty * 10;
-		textArea.setText(consoleInfo);
+		consoleTextArea.setText("Difficulty: " + difficulty + "\n"
+				+ "Maximun enemy health and attack is " + difficulty * 10);
 	}
 	
 	public void minusDifficulty(ActionEvent e) {
 		difficulty--;
-		consoleInfo += "\n" + "Difficulty: " + difficulty + "\n"
-				+ "Maximun enemy health and attack is " + difficulty * 10;
-		textArea.setText(consoleInfo);
-	}
-	
-	public void showStats(ActionEvent e) {
-		consoleInfo += "\n" + "Your health: " + user.getHealth()
-				+ "\n" + "Your attack: " + user.getAttack()
-				+ "\n" + "Your level: " + user.getLevel()
-				+ "\n" + "Your progress: " + user.getProgress();
-		textArea.setText(consoleInfo);
-	}
-	
-	public void clearTextArea(ActionEvent e) {
-		textArea.clear();
-		consoleInfo = "";
+		consoleTextArea.setText("Difficulty: " + difficulty + "\n"
+				+ "Maximun enemy health and attack is " + difficulty * 10);
 	}
 	
 	public void switchToScene1(ActionEvent e) throws IOException {
