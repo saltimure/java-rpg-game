@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ public class SceneController {
 	private Scene scene;
 	private Parent root;
 	private User user = new User();
-	private ArrayList<Image> imageArayList = new ArrayList<Image>();
+	//private ArrayList<Image> imageArayList = new ArrayList<Image>();
 	private String[] itemPool = {"Sword", "Axe","Shield","Revolver","Desert Eagle",
 								"Saber", "Dagger", "Sledgehammer", "Machete", "Knife"};
 	private int difficulty = 1;
@@ -50,6 +51,7 @@ public class SceneController {
 		} else {
 			consoleTextArea.setText("Enemy won" + "\n" + "You died.");
 			countDefeatedEnemy = 0;
+			itemPowerSequence.clear();
 			user = new User();
 			showStats();
 		}
@@ -68,33 +70,34 @@ public class SceneController {
 	}
 	
 	public void chooseLeftItem(ActionEvent e) {
-		--itemIndex;
-		consoleTextArea.setText(user.getItem(itemIndex));				
+		--itemIndex;			
+		consoleTextArea.setText(user.getItem(itemIndex) + " " + "(index: " + itemIndex + ")");				
 	}
 	
 	public void chooseRightItem(ActionEvent e) {
-		++itemIndex;
-		consoleTextArea.setText(user.getItem(itemIndex));				
+		++itemIndex;			
+		consoleTextArea.setText(user.getItem(itemIndex) + " " + "(index: " + itemIndex + ")");				
 	}	
 	
 	public void equipItem(ActionEvent e) {
 		user.setAttack(user.getAttack() - tempItemPower + itemPowerSequence.get(itemIndex));
 		equipedItem = user.getItem(itemIndex);
 		tempItemPower = itemPowerSequence.get(itemIndex);
-		consoleTextArea.setText("You equiped item");
+		consoleTextArea.setText("You equiped item" + " " + "(index: " + itemIndex + ")");
 		showStats();
 	}
 	
 	public void dropItem(ActionEvent e) {
-		if (user.getItem(itemIndex) != null) {
-			if (user.getItem(itemIndex) == equipedItem) {
-				user.setAttack(user.getAttack() - itemPowerSequence.get(itemIndex));
-			}
-			user.removeItem(itemIndex);
-			consoleTextArea.setText("You dropped item");
-			inventoryTextArea.setText(user.showInventory());
-			showStats();
+		if (user.getItem(itemIndex) == equipedItem) {
+			user.setAttack(user.getAttack() - tempItemPower);
+			tempItemPower = 0;
+			equipedItem = "";
 		}
+		user.removeItem(itemIndex);
+		itemPowerSequence.remove(itemIndex);
+		consoleTextArea.setText("You dropped item" + " " + "(index: " + itemIndex + ")");
+		inventoryTextArea.setText(user.showInventory());
+		showStats();
 	}
 	
 	public int randomNumber() {
@@ -105,12 +108,18 @@ public class SceneController {
 		statsTextArea.setText("Your health: " + user.getHealth()
 		+ "\n" + "Your attack: " + user.getAttack()
 		+ "\n" + "Your level: " + user.getLevel()
-		+ "\n" + "Your progress: " + user.getProgress());
+		+ "\n" + "Your progress: " + user.getProgress()
+		+ "\n" + "Weapon: " + equipedItem);
 	}
 	
 	public void restart(ActionEvent e) {
 		user = new User();
+		itemPowerSequence.clear();
+		equipedItem = "";
+		tempItemPower = 0;
 		consoleTextArea.setText("You restared the game");
+		inventoryTextArea.setText(user.showInventory());
+		showStats();
 	}
 	
 	public void plusDifficulty(ActionEvent e) {
