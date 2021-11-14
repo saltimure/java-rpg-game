@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ public class SceneController {
 	private User user = new User();
 	//private ArrayList<Image> imageArayList = new ArrayList<Image>();
 	private String[] itemPool = {"Sword", "Axe","Shield","Revolver","Desert Eagle",
-								"Saber", "Dagger", "Sledgehammer", "Machete", "Knife"};
+			"Saber", "Dagger", "Sledgehammer", "Machete", "Knife"};
 	private int difficulty = 1;
 	private int countDefeatedEnemy = 0;
 	private int itemPower = 0;
@@ -45,20 +46,29 @@ public class SceneController {
 		if (user.fight(user, new Enemy(difficulty)) == "Player won") {
 			consoleTextArea.setText("You defeated the enemy. " + ++countDefeatedEnemy);
 			itemAppear();
+			enemyImageAppear();
 			showStats();
 		} else {
 			consoleTextArea.setText("Enemy won" + "\n" + "You died.");
 			countDefeatedEnemy = 0;
+			equipedItem = "";
+			tempItemPower = 0;
 			itemPowerSequence.clear();
 			user = new User();
+			inventoryTextArea.setText(user.showInventory());
 			showStats();
 		}
 	}
 	
+	public void enemyImageAppear() {
+		Image enemyImage = new Image(randomNumber(3,1) + ".png");
+		imageView.setImage(enemyImage);
+	}
+	
 	public void itemAppear() {
-		if (randomNumber() == 1) {
-			item = itemPool[randomNumber() - 1];
-			itemPower = randomNumber();
+		if (randomNumber(10,1) == 1) {
+			item = itemPool[randomNumber(9,0)];
+			itemPower = randomNumber(10,1);
 			itemPowerSequence.add(itemPower);
 			user.addItem(item + " +" + itemPower);
 			consoleTextArea.setText("You defeated the enemy. " + countDefeatedEnemy + "\n" + 
@@ -98,8 +108,8 @@ public class SceneController {
 		showStats();
 	}
 	
-	public int randomNumber() {
-		return (int)(Math.random() * 10 + 1);
+	public int randomNumber(int max, int min) {
+		return (int)(Math.random() * max + min);
 	}
 	
 	public void showStats() {
@@ -123,13 +133,13 @@ public class SceneController {
 	public void plusDifficulty(ActionEvent e) {
 		difficulty++;
 		consoleTextArea.setText("Difficulty: " + difficulty + "\n"
-				+ "Maximun enemy health and attack is " + difficulty * 10);
+		+ "Maximun enemy health and attack is " + difficulty * 10);
 	}
 	
 	public void minusDifficulty(ActionEvent e) {
 		difficulty--;
 		consoleTextArea.setText("Difficulty: " + difficulty + "\n"
-				+ "Maximun enemy health and attack is " + difficulty * 10);
+		+ "Maximun enemy health and attack is " + difficulty * 10);
 	}
 	
 	public void switchToScene1(ActionEvent e) throws IOException {
