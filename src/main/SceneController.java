@@ -1,7 +1,6 @@
 package main;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -46,7 +44,7 @@ public class SceneController {
 	public void fightResult(ActionEvent e) {
 		if (user.fight(user, new Enemy(difficulty)) == "Player won") {
 			consoleTextArea.setText("You defeated the enemy. " + ++countDefeatedEnemy);
-			itemDrop();
+			itemAppear();
 			showStats();
 		} else {
 			consoleTextArea.setText("Enemy won" + "\n" + "You died.");
@@ -57,7 +55,7 @@ public class SceneController {
 		}
 	}
 	
-	public void itemDrop() {
+	public void itemAppear() {
 		if (randomNumber() == 1) {
 			item = itemPool[randomNumber() - 1];
 			itemPower = randomNumber();

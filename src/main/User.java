@@ -1,6 +1,5 @@
 package main;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class User {
